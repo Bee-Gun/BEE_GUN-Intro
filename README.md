@@ -48,12 +48,7 @@
 ---
 
 이런 상황에서 인공지능 기술로 Detecting 하고, 꿀벌 속에서 말벌만 잡아낼 수는 없을까??
-
-![KakaoTalk_Photo_2022-02-14-14-51-24.png](%E1%84%86%E1%85%A1%E1%86%AF%E1%84%87%E1%85%A5%E1%86%AF%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%89%200caf5/KakaoTalk_Photo_2022-02-14-14-51-24.png)
-
-![2AE3803C-0A41-4B46-946D-4F78BE57A7AD_1_201_a.jpeg](%E1%84%86%E1%85%A1%E1%86%AF%E1%84%87%E1%85%A5%E1%86%AF%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%89%200caf5/2AE3803C-0A41-4B46-946D-4F78BE57A7AD_1_201_a.jpeg)
-
-이런 문제 상황에서 사람이 직접 벌통을 지키는것 보다. 인공지능 기술을 사용하여 작업을 하는것이 훨씬 사람들의 생활을 풍요롭게할것이다.
+상황에서 사람이 직접 벌통을 지키는것 보다. 인공지능 기술을 사용하여 작업을 하는것이 훨씬 사람들의 생활을 풍요롭게할것이다.
 
 ---
 
@@ -92,34 +87,7 @@ AI Modeling을 통한 Detection 후, Web Service 및 실물 임베딩을 통한 
     그리고 다운로드를 하는 방법
     
 - 파이썬 코드를 통한 방법
-    
-    ```python
-    #Pytube 설치
-    pip install --upgrade "git+https://github.com/nficano/pytube.git"
-    ```
-    
-    ```python
-    import os 
-    import pytube # pip install pytube 
-    from pytube.cli import on_progress 
-    url = "https://www.youtube.com/watch?v=xP9hvIYHMC8" 
-    yt = pytube.YouTube(url, on_progress_callback=on_progress) 
-    print(yt.streams)
-    ```
-    
-    ```python
-    urls = ['유튜브 URL(1)','유튜브 URL(2)',]
-    # 해당 유튜브 영상 URL 주소를 LIST로 받는다.
-    ```
-    
-    ```python
-    save_dir = "/content/drive/MyDrive/Data_2nd/VDO" # 저장경로
-    for url in url_:
-      print(url)
-      yt = pytube.YouTube(url, on_progress_callback=on_progress) 
-      print(yt.streams)
-      yt.streams.filter(progressive=True, file_extension="mp4").order_by("resolution").desc().first().download(save_dir)
-    ```
+  
     
     파이썬 코드를 이용하면 URL주소를 대량으로 모아서 한번에 다운받을 수 있다.
     
@@ -132,51 +100,6 @@ AI Modeling을 통한 Detection 후, Web Service 및 실물 임베딩을 통한 
 
 ### □ 프레임 추출
 
-(해커톤 중 편의대로 코드 이름 및 변수명 제작 - 추후 수정필요)
-
-```python
-import cv2
-import os
-
-vido_folder = '/content/drive/MyDrive/Data/VDO'
-img_folder = '/content/drive/MyDrive/Data/img'
-Height_resolution = 720 (해상도)
-```
-
-폴더경로 설정하는 코드 입니다. 
-
-비디오 폴더 설정 / 이미지 폴더 설정 / 해상도 설정
-
-```python
-# Load all videos
-v_list = [v for v in os.listdir(v_folder) if v.endswith('mp4')]
-for idx, v in enumerate(v_list):
-    v_list[idx] = os.path.join(v_folder, v)
-print(len(v_list))
-print(v_list)
-```
-
-```python
-# Get frames
-count = 0
-for v_path in v_list:
-    vidcap = cv2.VideoCapture(v_path)
-    if vidcap.isOpened():
-        while True:
-            ret, image = vidcap.read()
-            if ret:
-                h, w, c = image.shape
-                nw = int(w*resolution/h)
-                image = cv2.resize(image, (nw, resolution)) # resize
-                if(int(vidcap.get(1)) % 30 == 0):
-                    cv2.imwrite("%s/%05d.png" % (i_folder,count), image)
-                    count += 1
-            else:
-                break
-        print("Number of width pixels : ", nw)
-        print('Saved frame %d.jpg' % (count-1))
-        vidcap.release()
-```
 
 ### □ 라벨링 작업
 
@@ -186,28 +109,6 @@ for v_path in v_list:
 
 [https://github.com/tzutalin/labelImg](https://github.com/tzutalin/labelImg)
 
-- 설치하는 방법
-    
-    **macOS**
-    
-    ```python
-    brew install qt  # Install qt-5.x.x by Homebrew
-    brew install libxml2
-    
-    or using pip
-    
-    pip3 install pyqt5 lxml # Install qt and lxml by pip
-    
-    make qt5py3
-    python3 labelImg.py
-    python3 labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
-    ```
-    
-    ```python
-    pip install labelImg
-    labelImg
-    labelImg [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
-    ```
     
 - Class 설정
 
@@ -282,15 +183,6 @@ cd './yolov5'
 
       (2) 라이브러리 설치
 
-```python
-!pip install -r requirements.txt
-```
-
-- pre-trained 가중치 다운로드
-    - 가중치 공유 주소 (n드라이브, 구글드라이브 등)
-        
-        [best.pt](%E1%84%86%E1%85%A1%E1%86%AF%E1%84%87%E1%85%A5%E1%86%AF%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%89%200caf5/best.pt)
-        
     - 가중치 저장 경로 정해주기
     
 - Pre-trained 가중치를 활용하여 말벌 인식 inference 진행
@@ -342,10 +234,6 @@ names: ['honey', 'hornet']  # class names list
 ```
 
 - 제공한 pre-trained 가중치를 기반으로 custom 데이터로 학습 진행
-
-```python
-!python train.py --img 720 --batch 16 --epochs 100 --data data/custom__.yaml --cfg models/yolov5s.yaml --weights weights/yolov5s.pt --project bee_n_label2_valid!python train.py --img 720 --batch 16 --epochs 100 --data data/custom__.yaml --cfg models/yolov5s.yaml --weights weights/yolov5s.pt
-```
 
 --img 이미지세로필셀수, --batch 배치사이즈, --epochs 에폭수, --data 데이터설정파일경로 --cfg 모델config파일경로, --weights pre-trained가중치경로
 
